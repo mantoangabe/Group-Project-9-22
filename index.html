@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Rating</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e90ff; /* Dodger blue */
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .icons {
+      margin-top: 15px;
+      font-size: 2rem; /* Make emojis larger */
+    }
+  </style>
+</head>
+<body>
+  <h1>Movie Rating Result</h1>
+  <p id="result"></p>
+  <div id="icons" class="icons"></div>
+
+  <script>
+    // Prompt for movie title
+    const movie = prompt("Enter the movie title:");
+
+    // Collect 3 ratings
+    let total = 0;
+    for (let i = 1; i <= 3; i++) {
+      let rating;
+      do {
+        rating = parseFloat(prompt(`User ${i}, enter your rating for "${movie}" (0–100):`));
+      } while (isNaN(rating) || rating < 0 || rating > 100);
+      total += rating;
+    }
+
+    // Calculate average
+    const avg = total / 3;
+
+    // Determine category and icons
+    let category = "";
+    let icons = "";
+    if (avg >= 90) {
+      category = "Smokin'";
+      icons = "🌶️🌶️🌶️";
+    } else if (avg >= 75) {
+      category = "Pretty Hot";
+      icons = "🌶️🌶️";
+    } else if (avg >= 50) {
+      category = "Mild";
+      icons = "🌶️";
+    } else {
+      category = "Ice Cold";
+      icons = "🧊";
+    }
+
+    // Display results
+    document.getElementById("result").textContent =
+      `${movie} - Average Rating: ${avg.toFixed(2)}% (${category})`;
+
+    document.getElementById("icons").textContent = icons;
+  </script>
+</body>
+</html>
